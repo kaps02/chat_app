@@ -1,0 +1,34 @@
+<!-- public/sendMessage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message</title>
+</head>
+<body>
+    <h1>Send Message</h1>
+    <form action="/send" method="POST">
+        <textarea name="message" placeholder="Enter your message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <!-- Add a div to display messages -->
+    <div id="messageContainer"></div>
+
+    <script>
+        // Function to fetch and display messages
+        function fetchMessages() {
+            fetch('/messages')
+                .then(response => response.text())
+                .then(messages => {
+                    // Update the content of the message container
+                    document.getElementById('messageContainer').innerHTML = messages;
+                })
+                .catch(error => console.error('Error fetching messages:', error));
+        }
+
+        // Call the fetchMessages function when the page loads
+        fetchMessages();
+    </script>
+</body>
+</html>
